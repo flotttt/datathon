@@ -116,3 +116,21 @@ def key_events() -> pd.DataFrame:
     frame = pd.DataFrame(KEY_EVENTS, columns=["date", "label"])
     frame["date"] = pd.to_datetime(frame["date"])
     return frame
+
+
+def verified_breakdown(frame: pd.DataFrame) -> pd.DataFrame:
+    """Repartition des messages selon que le compte est certifie ou non."""
+    labels = frame["X Verified"].map({True: "Verifie", False: "Non verifie"})
+    counts = labels.value_counts()
+    result = counts.reset_index()
+    result.columns = ["statut", "count"]
+    return result
+
+
+def top_by_reach(frame: pd.DataFrame, limit: int = 15) -> pd.DataFrame:
+    """Comptes qui touchent la plus grande audience cumulee (reach)."""
+    grouped = frame.groupby("Author")["Reach"].sum()
+    top = grouped.sort_values(ascending=False).head(limit)
+    result = top.reset_index()
+    result.columns = ["author", "reach"]
+    return result
