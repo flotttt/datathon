@@ -15,9 +15,9 @@ def charger_cle():
     # Option A : Google Colab Secrets
     try:
         from google.colab import userdata  # type: ignore
-        key = userdata.get("ANTHROPIC_API_KEY")
+        key = userdata.get("MISTRAL_API_KEY")
         if key:
-            os.environ["ANTHROPIC_API_KEY"] = key
+            os.environ["MISTRAL_API_KEY"] = key
             return
     except Exception:
         pass
@@ -27,9 +27,9 @@ def charger_cle():
         load_dotenv()
     except Exception:
         pass
-    if not os.environ.get("ANTHROPIC_API_KEY"):
+    if not os.environ.get("MISTRAL_API_KEY"):
         raise RuntimeError(
-            "Pas de clé API. Mettez ANTHROPIC_API_KEY dans .env ou les Secrets Colab."
+            "Pas de clé API. Mettez MISTRAL_API_KEY dans .env ou les Secrets Colab."
         )
 
 
