@@ -34,91 +34,88 @@
     ],
     "narratifs": [
       {
-        "nom": "Copinage et favoritisme politique",
+        "nom": "Favoritisme politique et copinage au CNC",
         "poids": "dominant",
         "mots_cles": [
           "copinage",
           "favoritisme",
-          "gauchisme",
-          "extrême gauche",
-          "pote",
-          "parti pris",
           "conflit d'intérêts",
           "argent public",
-          "subventions",
+          "distribution entre potes",
+          "partialité",
+          "commission",
           "Ultia",
           "CNC Talent"
         ]
       },
       {
-        "nom": "Gaspillage d'argent public",
-        "poids": "dominant",
+        "nom": "Gaspillage d'argent public et subventions injustifiées",
+        "poids": "secondaire",
         "mots_cles": [
           "gaspillage",
-          "argent public",
-          "budget",
-          "millions",
-          "taxes",
+          "argent des Français",
           "subventions",
+          "échec commercial",
           "films peu vus",
-          "inefficacité",
-          "détournement",
-          "20.000 entrées"
+          "taxes",
+          "budget CNC",
+          "détournement"
         ]
       },
       {
-        "nom": "Inégalité idéologique de financement",
+        "nom": "Financement d'un écosystème médiatique d'extrême gauche",
         "poids": "secondaire",
         "mots_cles": [
-          "extrême droite",
-          "discrimination",
-          "verrouillage",
-          "aucun média de droite",
-          "partialité",
-          "refus de financer",
-          "idéologique"
+          "extrême gauche",
+          "Blast",
+          "StreetPress",
+          "Jean Massiet",
+          "propagande de gauche",
+          "financement public",
+          "médias orientés",
+          "exclusion de la droite"
         ]
       }
     ]
   },
   "brief": {
     "repondre": "oui",
-    "timing": "Dans les prochaines heures, avant que le sentiment neutre ne bascule vers le négatif.",
-    "cible_narrative": "Copinage et favoritisme politique",
+    "timing": "Dans les prochaines heures pour éviter que le récit ne s'ancre",
+    "cible_narrative": "Favoritisme politique et copinage au CNC",
     "posture": "factuel",
-    "justification": "La propagation en phase de traîne permet une réponse posée pour clarifier les procédures de financement. Le narratif de copinage est dominant et attaque la crédibilité du CNC, il peut être contré par des faits vérifiables sur les critères objectifs d'attribution. Une posture factuelle est appropriée car l'agressivité est modérée et les faits sont disponibles.",
+    "justification": "La propagation en 'traine' permet une réponse posée sans alimenter une escalade ; le narratif dominant est adressable par des faits sur les critères de sélection et la composition des commissions ; une mise au point factuelle peut dissiper les soupçons de partialité.",
     "confiance": "haute",
     "escalade_humaine": false
   },
   "riposte": {
     "messages": [
-      "Le CNC applique des critères objectifs et transparents pour l'attribution de ses financements. Chaque dossier est examiné par des comités indépendants, sur la base de grilles préétablies et d'un appel à projets public. Les procédures détaillées sont consultables sur notre site.",
-      "Les allégations de favoritisme ou de copinage politique ne correspondent pas aux faits. Le CNC publie régulièrement la liste des projets soutenus ainsi que les motifs de sélection. Toute affirmation contraire peut être vérifiée auprès de nos instances de contrôle."
+      "Le CNC rappelle que ses aides sont attribuées par des commissions indépendantes selon des critères artistiques et techniques objectifs. Aucune décision individuelle ne repose sur des considérations politiques. La composition des commissions est publique et diversifiée.",
+      "Les procédures de sélection du CNC sont encadrées par des règles strictes garantissant l'équité et la transparence. Les soupçons de favoritisme ne sont pas fondés. Nous invitons à consulter les modalités d'attribution disponibles sur notre site officiel."
     ],
-    "canal": "communique",
+    "canal": "tweet",
     "a_valider_humainement": true
   },
   "metriques": {
     "analyste": {
       "appels": 1,
       "input_tokens": 3502,
-      "output_tokens": 991,
-      "total_tokens": 4493,
-      "duree_s": 12.76
+      "output_tokens": 658,
+      "total_tokens": 4160,
+      "duree_s": 9.78
     },
     "stratege": {
       "appels": 1,
-      "input_tokens": 935,
-      "output_tokens": 968,
-      "total_tokens": 1903,
-      "duree_s": 10.31
+      "input_tokens": 937,
+      "output_tokens": 706,
+      "total_tokens": 1643,
+      "duree_s": 8.29
     },
     "redacteur": {
       "appels": 1,
-      "input_tokens": 377,
-      "output_tokens": 456,
-      "total_tokens": 833,
-      "duree_s": 6.04
+      "input_tokens": 501,
+      "output_tokens": 1294,
+      "total_tokens": 1795,
+      "duree_s": 13.71
     }
   },
   "erreur": null

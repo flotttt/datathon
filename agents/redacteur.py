@@ -34,7 +34,6 @@ Renvoie UNIQUEMENT un objet JSON, structure EXACTE :
   "a_valider_humainement": true
 }}
 
-<<<<<<< HEAD
 Règles strictes :
 2 propositions de message, adaptées au canal indiqué dans le brief.
 Pour un tweet : max 280 caractères, phrase directe, pas de hashtag militant.
@@ -46,28 +45,13 @@ Ne mentionne aucune personne nommément. Reste au niveau institutionnel.
 N'invente aucun chiffre ou fait non présent dans le brief.
 """
 
+
 # Note d'attente quand on ne répond pas
 def _note_attente(brief: dict) -> dict:
     return {
         "messages": [
             f"[AUCUN MESSAGE GÉNÉRÉ] Décision : {brief['repondre']}. "
             f"{brief['justification']} Timing conseillé : {brief['timing']}."
-=======
-Regles :
-- 2 propositions de message, courtes (adaptees au canal).
-- Respecte la "posture" du brief (factuel / apaisant / ferme).
-- Vise le narratif indique dans "cible_narrative", sans agresser.
-- Ne mentionne pas de personne nommement ; reste au niveau institutionnel.
-"""
-
-
-def _note_attente(brief: dict) -> dict:
-    """Pas de message si on ne repond pas : note d'attente."""
-    return {
-        "messages": [
-            f"[AUCUN MESSAGE GENERE] Decision : {brief['repondre']}. "
-            f"{brief['justification']} Timing conseille : {brief['timing']}."
->>>>>>> 9fbb4af (re orga)
         ],
         "canal": "communique",
         "a_valider_humainement": True,
@@ -75,19 +59,11 @@ def _note_attente(brief: dict) -> dict:
 
 
 def run(brief: dict) -> dict:
-<<<<<<< HEAD
     # Cohérence du pipeline : on ne rédige que si on répond.
     if brief.get("repondre") != "oui":
         return _note_attente(brief)
 
     llm = get_llm(temperature=0.4)  # rédaction = un peu plus de créativité
-=======
-    """Redige la riposte si le Stratege a tranche 'oui', sinon note d'attente."""
-    if brief.get("repondre") != "oui":
-        return _note_attente(brief)
-
-    llm = get_llm(temperature=0.4)
->>>>>>> 9fbb4af (re orga)
     prompt = PROMPT_REDACTEUR.format(brief=json.dumps(brief, ensure_ascii=False, indent=2))
     reponse = llm.invoke(prompt)
     return extraire_json(reponse.content)
