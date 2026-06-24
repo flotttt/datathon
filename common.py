@@ -1,45 +1,44 @@
 """
-common.py — Plomberie partagée : clé API, chargement LLM, extraction JSON.
-Le chargement du corpus est délégué à data_loading.py (module de Flo).
-Aucun binôme n'a à réécrire ça.
+common.py — Plomberie partagee : cle API, chargement LLM, extraction JSON.
+Le chargement du corpus est delegue a data_loading.py (module de Flo).
+Aucun binome n'a a reecrire ca.
 
-LLM utilisé : Gemini 3.1 Flash Lite (gratuit, bon quota journalier).
+LLM utilise : DeepSeek (API compatible OpenAI). Un seul endroit pour changer
+de modele/endpoint pour toute l'equipe.
 """
 import os
 import json
 
-# Le nom du modèle est centralisé ici : un seul endroit à changer pour
-# toute l'équipe si on doit basculer (quota, dispo...).
-MODELE = "gemini-3.1-flash-lite"
-PROVIDER = "google_genai"
-
-# ---------------------------------------------------------------------
-# THROTTLE — limite le DÉBIT pour ne jamais exploser le RPM.
-# 13 req/min = 0.2167 req/s. Le limiteur ATTEND tout seul entre les
-# appels : impossible de dépasser, même en relançant le script en boucle.
-# Partagé par TOUS les agents (un seul limiteur pour tout le process).
-# ---------------------------------------------------------------------
 from langchain_core.rate_limiters import InMemoryRateLimiter
 
+# Centralise : un seul endroit a changer pour toute l'equipe.
+MODELE = os.environ.get("LLM_MODEL", "deepseek-v4-flash")
+BASE_URL = os.environ.get("LLM_BASE_URL", "https://api.deepseek.com")
+
+# ---------------------------------------------------------------------
+# THROTTLE — lisse le debit pour ne pas exploser le rate limit.
+# Partage par TOUS les agents (un seul limiteur pour tout le process).
+# DeepSeek (payant) tolere plus que les offres gratuites : on reste large.
+# ---------------------------------------------------------------------
 _LIMITER = InMemoryRateLimiter(
-    requests_per_second=13 / 60,   # 13 requêtes par minute
+    requests_per_second=2,
     check_every_n_seconds=0.5,
-    max_bucket_size=2,             # autorise 2 appels rapprochés puis lisse
+    max_bucket_size=4,
 )
 
 
 # ---------------------------------------------------------------------
-# 1) CLÉ API  — JAMAIS en clair dans le code, JAMAIS commitée sur Git.
-#    Gemini lit la variable GOOGLE_API_KEY.
+# 1) CLE API — JAMAIS en clair dans le code, JAMAIS commitee sur Git.
+#    DeepSeek lit la variable DEEPSEEK_API_KEY (ou LLM_API_KEY).
 #    Mettez-la dans un .env OU dans les Secrets Colab.
 # ---------------------------------------------------------------------
 def charger_cle():
     # Option A : Google Colab Secrets
     try:
         from google.colab import userdata  # type: ignore
-        key = userdata.get("GOOGLE_API_KEY")
+        key = userdata.get("DEEPSEEK_API_KEY")
         if key:
-            os.environ["GOOGLE_API_KEY"] = key
+            os.environ["DEEPSEEK_API_KEY"] = key
             return
     except Exception:
         pass
@@ -49,35 +48,75 @@ def charger_cle():
         load_dotenv()
     except Exception:
         pass
-    if not os.environ.get("GOOGLE_API_KEY"):
+    if not _api_key():
         raise RuntimeError(
-            "Pas de clé API. Mettez GOOGLE_API_KEY dans .env ou les Secrets Colab "
-            "(récupérez-la sur aistudio.google.com)."
+            "Pas de cle API. Mettez DEEPSEEK_API_KEY dans un .env "
+            "(recuperez-la sur platform.deepseek.com)."
         )
 
 
+def _api_key():
+    return os.environ.get("DEEPSEEK_API_KEY") or os.environ.get("LLM_API_KEY")
+
+
 # ---------------------------------------------------------------------
-# 2) LE MODÈLE  — un seul endroit pour changer de LLM si besoin.
+# MESURE — temps et tokens. Suivi partage, lu par l'orchestrateur pour
+# afficher le cout de chaque agent. (classe imposee par l'API LangChain)
+# ---------------------------------------------------------------------
+from langchain_core.callbacks import BaseCallbackHandler
+
+
+class _SuiviTokens(BaseCallbackHandler):
+    def __init__(self):
+        self.reset()
+
+    def reset(self):
+        self.appels = 0
+        self.input_tokens = 0
+        self.output_tokens = 0
+
+    def snapshot(self) -> dict:
+        return {
+            "appels": self.appels,
+            "input_tokens": self.input_tokens,
+            "output_tokens": self.output_tokens,
+            "total_tokens": self.input_tokens + self.output_tokens,
+        }
+
+    def on_llm_end(self, response, **kwargs):
+        usage = (response.llm_output or {}).get("token_usage") or {}
+        self.input_tokens += usage.get("prompt_tokens", 0)
+        self.output_tokens += usage.get("completion_tokens", 0)
+        self.appels += 1
+
+
+USAGE = _SuiviTokens()
+
+
+# ---------------------------------------------------------------------
+# 2) LE MODELE — un seul endroit pour changer de LLM si besoin.
 # ---------------------------------------------------------------------
 def get_llm(temperature: float = 0.2):
-    import os
-    from langchain.chat_models import init_chat_model
-    return init_chat_model(
-        MODELE,
-        model_provider=PROVIDER,
+    if not _api_key():
+        charger_cle()
+    from langchain_openai import ChatOpenAI
+    return ChatOpenAI(
+        model=MODELE,
+        base_url=BASE_URL,
+        api_key=_api_key(),
         temperature=temperature,
-        rate_limiter=_LIMITER,   # throttle partagé : jamais > 13/min
-        max_retries=3,           # si on touche un mur (429/TPM), réessaie au lieu de crasher
+        rate_limiter=_LIMITER,   # throttle partage
+        max_retries=3,           # si on touche un mur, reessaie au lieu de crasher
+        callbacks=[USAGE],       # compte les tokens de chaque appel
     )
 
 
 # ---------------------------------------------------------------------
-# 3) EXTRACTION JSON  — récupère le JSON d'une réponse LLM, même s'il y
-#    a du texte autour ou des ```json ... ```. Robuste pour la démo.
+# 3) EXTRACTION JSON — recupere le JSON d'une reponse LLM, meme s'il y
+#    a du texte autour ou des ```json ... ```. Robuste pour la demo.
 # ---------------------------------------------------------------------
 def extraire_json(reponse_texte) -> dict:
-    # Normalise le contenu : Gemini (via LangChain) peut renvoyer une LISTE
-    # de blocs au lieu d'une chaîne. On reconstruit le texte dans tous les cas.
+    # Normalise le contenu : certains modeles renvoient une LISTE de blocs.
     if isinstance(reponse_texte, list):
         morceaux = []
         for bloc in reponse_texte:

@@ -45,6 +45,7 @@ Ne mentionne aucune personne nommément. Reste au niveau institutionnel.
 N'invente aucun chiffre ou fait non présent dans le brief.
 """
 
+
 # Note d'attente quand on ne répond pas
 def _note_attente(brief: dict) -> dict:
     return {

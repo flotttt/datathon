@@ -34,13 +34,19 @@ CACHE_NARRATIFS = "narratifs_cache.json"
 # PARTIE 1 — pandas (déterministe, via les modules de Flo)
 # =====================================================================
 def _etat_propagation(df: pd.DataFrame) -> str:
-    """Classe l'état global du corpus : montee / pic / traine.
-    Heuristique simple sur la concentration du volume."""
-    concentration = metrics.peak_concentration(df, days=4)
-    # 65% du volume sur 4 jours => crise très concentrée (déjà passée par un pic)
-    if concentration >= 0.5:
+    """Classe l'etat de la crise : montee / pic / traine.
+    On compare l'activite RECENTE au jour de pic, pour situer ou on en est
+    dans le temps (et non la concentration globale, qui dirait toujours 'pic')."""
+    counts = metrics.timeline(df, "1D")["count"]
+    pic = counts.max()
+    if pic == 0:
+        return "traine"
+    recent = counts.tail(3).mean()          # moyenne des 3 derniers jours
+    ratio = recent / pic
+    if ratio >= 0.5:
         return "pic"
-    elif concentration >= 0.3:
+    avant = counts.tail(6).head(3).mean()   # les 3 jours juste avant
+    if ratio >= 0.2 and recent > avant * 1.3:
         return "montee"
     return "traine"
 

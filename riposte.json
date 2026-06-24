@@ -1,0 +1,122 @@
+{
+  "analyse": {
+    "etat_propagation": "traine",
+    "ton": {
+      "sentiment_global": "neutre",
+      "niveau_agressivite": "moyen"
+    },
+    "acteurs_cles": [
+      {
+        "pseudo": "SirAfuera",
+        "type": "non_certifie",
+        "portee": "haute"
+      },
+      {
+        "pseudo": "LeDindonFiscal",
+        "type": "certifie",
+        "portee": "haute"
+      },
+      {
+        "pseudo": "ojim_france",
+        "type": "certifie",
+        "portee": "haute"
+      },
+      {
+        "pseudo": "jon_delorraine",
+        "type": "non_certifie",
+        "portee": "haute"
+      },
+      {
+        "pseudo": "anatolium",
+        "type": "non_certifie",
+        "portee": "haute"
+      }
+    ],
+    "narratifs": [
+      {
+        "nom": "Favoritisme politique et copinage au CNC",
+        "poids": "dominant",
+        "mots_cles": [
+          "copinage",
+          "favoritisme",
+          "conflit d'intérêts",
+          "argent public",
+          "distribution entre potes",
+          "partialité",
+          "commission",
+          "Ultia",
+          "CNC Talent"
+        ]
+      },
+      {
+        "nom": "Gaspillage d'argent public et subventions injustifiées",
+        "poids": "secondaire",
+        "mots_cles": [
+          "gaspillage",
+          "argent des Français",
+          "subventions",
+          "échec commercial",
+          "films peu vus",
+          "taxes",
+          "budget CNC",
+          "détournement"
+        ]
+      },
+      {
+        "nom": "Financement d'un écosystème médiatique d'extrême gauche",
+        "poids": "secondaire",
+        "mots_cles": [
+          "extrême gauche",
+          "Blast",
+          "StreetPress",
+          "Jean Massiet",
+          "propagande de gauche",
+          "financement public",
+          "médias orientés",
+          "exclusion de la droite"
+        ]
+      }
+    ]
+  },
+  "brief": {
+    "repondre": "oui",
+    "timing": "Dans les prochaines heures pour éviter que le récit ne s'ancre",
+    "cible_narrative": "Favoritisme politique et copinage au CNC",
+    "posture": "factuel",
+    "justification": "La propagation en 'traine' permet une réponse posée sans alimenter une escalade ; le narratif dominant est adressable par des faits sur les critères de sélection et la composition des commissions ; une mise au point factuelle peut dissiper les soupçons de partialité.",
+    "confiance": "haute",
+    "escalade_humaine": false
+  },
+  "riposte": {
+    "messages": [
+      "Le CNC rappelle que ses aides sont attribuées par des commissions indépendantes selon des critères artistiques et techniques objectifs. Aucune décision individuelle ne repose sur des considérations politiques. La composition des commissions est publique et diversifiée.",
+      "Les procédures de sélection du CNC sont encadrées par des règles strictes garantissant l'équité et la transparence. Les soupçons de favoritisme ne sont pas fondés. Nous invitons à consulter les modalités d'attribution disponibles sur notre site officiel."
+    ],
+    "canal": "tweet",
+    "a_valider_humainement": true
+  },
+  "metriques": {
+    "analyste": {
+      "appels": 1,
+      "input_tokens": 3502,
+      "output_tokens": 658,
+      "total_tokens": 4160,
+      "duree_s": 9.78
+    },
+    "stratege": {
+      "appels": 1,
+      "input_tokens": 937,
+      "output_tokens": 706,
+      "total_tokens": 1643,
+      "duree_s": 8.29
+    },
+    "redacteur": {
+      "appels": 1,
+      "input_tokens": 501,
+      "output_tokens": 1294,
+      "total_tokens": 1795,
+      "duree_s": 13.71
+    }
+  },
+  "erreur": null
+}
