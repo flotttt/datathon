@@ -122,6 +122,17 @@ def _(alt, corpus, granularite, metrics):
 
 
 @app.cell
+def _(mo):
+    mo.md("""
+    La courbe explose le 27/03, juste apres le clip de @TwitchGauchiste (26/03) :
+    l'emballement suit l'etincelle a un jour pres. Un second pic accompagne la
+    suspension du fonds (08/04). 86 % des messages sont des retweets : la dynamique
+    est massivement de la rediffusion, pas du debat.
+    """)
+    return
+
+
+@app.cell
 def _(alt, corpus, metrics):
     repartition = metrics.engagement_breakdown(corpus)
     barres_type = (
@@ -190,6 +201,57 @@ def _(alt, corpus, metrics):
 
 
 @app.cell
+def _(alt, corpus, metrics):
+    certifies = metrics.verified_breakdown(corpus)
+    barres_certifies = (
+        alt.Chart(certifies)
+        .mark_bar()
+        .encode(
+            x=alt.X("count:Q", title="Messages"),
+            y=alt.Y("statut:N", sort="-x", title="Statut du compte"),
+        )
+        .properties(
+            title="Messages par statut de compte (certifie ou non)",
+            width="container",
+            height=160,
+        )
+    )
+    barres_certifies
+    return
+
+
+@app.cell
+def _(alt, corpus, metrics):
+    audience = metrics.top_by_reach(corpus, 15)
+    barres_reach = (
+        alt.Chart(audience)
+        .mark_bar()
+        .encode(
+            x=alt.X("reach:Q", title="Reach cumule"),
+            y=alt.Y("author:N", sort="-x", title="Auteur"),
+        )
+        .properties(
+            title="Comptes a la plus grande audience (reach cumule)",
+            width="container",
+            height=400,
+        )
+    )
+    barres_reach
+    return
+
+
+@app.cell
+def _(mo):
+    mo.md("""
+    Les comptes les plus actifs sont surtout non certifies : la vague est portee par
+    des anonymes, pas par des medias. Le top des comptes amplifies, lui, est nettement
+    marque politiquement. Comparer le volume de messages et le reach cumule separe les
+    comptes bruyants (beaucoup de messages) des comptes a forte audience.
+    """)
+    return
+
+
+@app.cell
 def _(mo):
     mo.md("""
     ## Semantique
@@ -221,6 +283,16 @@ def _(alt, corpus, metrics):
 @app.cell
 def _(mo):
     mo.md("""
+    Le sentiment reste majoritairement neutre (66 %) avec une part negative forte
+    (31 %). Cet axe s'appuie sur la colonne fournie ; une mesure d'agressivite plus
+    fine demanderait un agent dedie.
+    """)
+    return
+
+
+@app.cell
+def _(mo):
+    mo.md("""
     ## Narratifs (premiere approche par hashtags)
     """)
     return
@@ -243,6 +315,17 @@ def _(alt, corpus, metrics):
         )
     )
     barres_hashtags
+    return
+
+
+@app.cell
+def _(mo):
+    mo.md("""
+    Les hashtags sont peu representatifs ici : #ultia n'apparait que 177 fois et des
+    tags hors-sujet (#racketfiscal) remontent via un tweet viral. La crise se joue
+    surtout en retweets bruts, sans hashtag. Le vrai classement des narratifs passera
+    par un agent de classification (etape suivante).
+    """)
     return
 
 
