@@ -167,7 +167,7 @@ def lancer_pipeline(corpus_texte: str, verbose: bool = True) -> dict:
 
 if __name__ == "__main__":
     charger_cle()
-    df = charger_corpus("data.xlsx")
+    df = charger_corpus("Dataset/data.xlsx")
     ech = echantillon(df, n=40, fenetre_pic=True)
     texte = corpus_en_texte(ech, max_msg=40)
 
