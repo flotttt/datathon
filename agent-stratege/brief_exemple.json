@@ -1,0 +1,63 @@
+{
+  "_note": "Chiffres reels issus de l'analyse marimo, SAUF les narratifs (poids et labels) qui restent des hypotheses tant que le Classifieur (Mathis) n'a pas tourne.",
+  "crise": "Affaire Ultia x CNC",
+  "periode": "2026-03-19 au 2026-05-01",
+  "volume_total": 35396,
+  "part_retweets": "86%",
+  "sentiment_global": { "negatif": "31%", "neutre": "66%", "positif": "3%" },
+  "coordination_detectee": "a_analyser",
+  "top_acteurs_amplifies": [
+    "fxbellamy",
+    "MarionMarechal",
+    "EugenieBastie",
+    "ojim_france",
+    "LeDindonFiscal",
+    "TwitchGauchiste"
+  ],
+  "pics": [
+    { "date": "2026-03-27", "volume": 7303, "evenement": "clip viral @TwitchGauchiste" },
+    { "date": "2026-04-08", "volume": 992, "evenement": "suspension du fonds (3 M EUR)" }
+  ],
+  "narratifs": [
+    {
+      "label": "copinage",
+      "statut": "hypothese",
+      "poids_pct": 42,
+      "sentiment": "negatif",
+      "exemples": [
+        "Ils s'auto-attribuent l'argent public entre amis militants.",
+        "La liste des beneficiaires, c'est un entre-soi."
+      ]
+    },
+    {
+      "label": "censure",
+      "statut": "hypothese",
+      "poids_pct": 28,
+      "sentiment": "negatif",
+      "exemples": [
+        "On ecarte une juree pour ses opinions.",
+        "Le CNC plie devant la pression."
+      ]
+    },
+    {
+      "label": "cyberharcelement",
+      "statut": "hypothese",
+      "poids_pct": 18,
+      "sentiment": "negatif",
+      "exemples": [
+        "Ultia recoit des menaces, c'est du harcelement organise.",
+        "Meute en ligne contre une seule personne."
+      ]
+    },
+    {
+      "label": "defense_ultia",
+      "statut": "hypothese",
+      "poids_pct": 12,
+      "sentiment": "neutre",
+      "exemples": [
+        "Ses propos ont ete sortis de leur contexte.",
+        "Elle visait les contenus haineux."
+      ]
+    }
+  ]
+}
