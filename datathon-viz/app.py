@@ -9,10 +9,11 @@ def _():
     import marimo as mo
     import altair as alt
 
+    import cleaning
     import data_loading
     import metrics
 
-    return alt, data_loading, metrics, mo
+    return alt, cleaning, data_loading, metrics, mo
 
 
 @app.cell
@@ -326,6 +327,100 @@ def _(mo):
     surtout en retweets bruts, sans hashtag. Le vrai classement des narratifs passera
     par un agent de classification (etape suivante).
     """)
+    return
+
+
+@app.cell
+def _(mo):
+    mo.md("""
+    ## Preparation pour le classifieur (nettoyage + export)
+    """)
+    return
+
+
+@app.cell
+def _(cleaning, corpus):
+    corpus_propre = cleaning.add_clean_column(corpus)
+    return (corpus_propre,)
+
+
+@app.cell
+def _(cleaning, corpus_propre, mo):
+    resume = cleaning.cleaning_summary(corpus_propre)
+    reduction = 1 - resume["unique_clean"] / resume["total"]
+    cartes_clean = mo.hstack(
+        [
+            mo.stat(resume["total"], label="Messages bruts", bordered=True),
+            mo.stat(f"{resume['rt_share']:.0%}", label="Prefixe RT", bordered=True),
+            mo.stat(f"{resume['url_share']:.0%}", label="Avec URL", bordered=True),
+            mo.stat(resume["unique_clean"], label="Textes a classer", bordered=True),
+            mo.stat(
+                f"{reduction:.0%}",
+                label="Reduction a classer",
+                bordered=True,
+            ),
+        ],
+        gap=1,
+    )
+    cartes_clean
+    return
+
+
+@app.cell
+def _(alt, cleaning, corpus_propre):
+    etapes = cleaning.dedup_steps(corpus_propre)
+    barres_dedup = (
+        alt.Chart(etapes)
+        .mark_bar()
+        .encode(
+            x=alt.X("count:Q", title="Nombre"),
+            y=alt.Y("etape:N", sort=None, title=None),
+            tooltip=["etape:N", "count:Q"],
+        )
+        .properties(
+            title="Avant / apres : volume a classer",
+            width="container",
+            height=160,
+        )
+    )
+    barres_dedup
+    return
+
+
+@app.cell
+def _(mo):
+    mo.md("""
+    Le nettoyage retire le prefixe `RT @user` et les URLs. En classant les textes
+    uniques au lieu de tous les messages, on passe de 35 396 a 5 710 textes, sans
+    perdre d'information. Le tableau ci-dessous montre les textes les plus repetes
+    et leur nombre d'occurrences : chacun ne sera classe qu'une seule fois.
+    """)
+    return
+
+
+@app.cell
+def _(cleaning, corpus_propre, mo):
+    doublons = cleaning.unique_texts(corpus_propre).head(15).copy()
+    doublons["text_clean"] = doublons["text_clean"].str.slice(0, 140)
+    mo.ui.table(doublons, selection=None)
+    return
+
+
+@app.cell
+def _(mo):
+    bouton_export = mo.ui.run_button(label="Exporter le corpus nettoye (CSV)")
+    bouton_export
+    return (bouton_export,)
+
+
+@app.cell
+def _(bouton_export, cleaning, corpus_propre, mo):
+    if bouton_export.value:
+        chemin = cleaning.export_clean(corpus_propre, "data_clean.csv")
+        message_export = mo.md(f"Export ecrit : **{chemin}** ({len(corpus_propre)} lignes).")
+    else:
+        message_export = mo.md("Clique sur le bouton pour ecrire `data_clean.csv`.")
+    message_export
     return
 
 
