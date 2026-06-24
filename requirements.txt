@@ -1,0 +1,8 @@
+marimo
+pandas
+altair
+openpyxl
+langchain
+langchain[anthropic]
+langgraph
+python-dotenv
