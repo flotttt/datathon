@@ -35,14 +35,15 @@ def charger_cle():
 
 # ---------------------------------------------------------------------
 # 2) LE MODÈLE  — un seul endroit pour changer de LLM si besoin.
-#    (Anthropic par défaut ; remplaçable par Gemini/Groq sans toucher
+#    (Mistral par défaut pour ce binôme ; remplaçable sans toucher
 #     aux agents, ils reçoivent juste l'objet `llm`.)
 # ---------------------------------------------------------------------
 def get_llm(temperature: float = 0.2):
+    import os
     from langchain.chat_models import init_chat_model
     return init_chat_model(
-        "claude-sonnet-4-6",
-        model_provider="anthropic",
+        os.getenv("MISTRAL_MODEL", "mistral-small-latest"),
+        model_provider="mistralai",
         temperature=temperature,
     )
 
