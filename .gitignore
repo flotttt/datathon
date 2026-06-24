@@ -9,6 +9,11 @@
 # --- Python ---
 __pycache__/
 *.py[cod]
+
+# --- Caches runtime / fichiers generes (regenerables) ---
+narratifs_cache.json
+Dataset/data_clean.csv
+Dataset/textes_uniques.csv
 *.egg-info/
 .pytest_cache/
 .ipynb_checkpoints/
