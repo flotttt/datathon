@@ -2,7 +2,7 @@
 orchestrateur.py — LE CHEF D'ORCHESTRE (poste de Mekk)
 Version LangGraph : transforme 3 agents isolés en UN produit.
 
-Pipeline : Corpus -> Analyste -> Stratège -> Rédacteur -> Riposte
+Pipeline : Corpus(DataFrame) -> Analyste -> Stratège -> Rédacteur -> Riposte
 
 Lancement :
     python orchestrateur.py
