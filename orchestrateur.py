@@ -10,7 +10,8 @@ Lancement :
 import json
 from common import charger_cle, charger_corpus, echantillon, corpus_en_texte
 from contracts import valider_sortie
-from agents import analyste, stratege, redacteur
+from templates.agents import stratege
+from templates.agents import analyste, redacteur
 
 
 def lancer_pipeline(corpus_texte: str, verbose: bool = True) -> dict:
