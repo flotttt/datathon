@@ -196,6 +196,11 @@ if __name__ == "__main__":
 
     resultat = lancer_pipeline(df)
 
+    resultat["contexte"] = {
+        "entite": "Cellule de crise — CNC",
+        "messages": len(df),
+    }
+
     with open("riposte.json", "w", encoding="utf-8") as fichier:
         json.dump(resultat, fichier, ensure_ascii=False, indent=2)
     print("\nResultat ecrit dans riposte.json (lisible par le dashboard).")
