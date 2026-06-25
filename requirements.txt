@@ -3,6 +3,6 @@ pandas
 altair
 openpyxl
 langchain
-langchain-openai
+langchain[anthropic]
 langgraph
 python-dotenv
