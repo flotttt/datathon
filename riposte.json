@@ -34,88 +34,95 @@
     ],
     "narratifs": [
       {
-        "nom": "Favoritisme politique et copinage au CNC",
+        "nom": "Dénonciation d'un système de favoritisme idéologique",
         "poids": "dominant",
         "mots_cles": [
+          "CNC",
+          "gauchisme",
           "copinage",
-          "favoritisme",
-          "conflit d'intérêts",
-          "argent public",
-          "distribution entre potes",
-          "partialité",
-          "commission",
-          "Ultia",
-          "CNC Talent"
-        ]
-      },
-      {
-        "nom": "Gaspillage d'argent public et subventions injustifiées",
-        "poids": "secondaire",
-        "mots_cles": [
-          "gaspillage",
-          "argent des Français",
           "subventions",
-          "échec commercial",
-          "films peu vus",
-          "taxes",
-          "budget CNC",
-          "détournement"
+          "extrême gauche",
+          "partialité",
+          "argent public"
         ]
       },
       {
-        "nom": "Financement d'un écosystème médiatique d'extrême gauche",
+        "nom": "Exigence de transparence et de réforme du financement public",
+        "poids": "dominant",
+        "mots_cles": [
+          "transparence",
+          "contrôle",
+          "détournement",
+          "corruption",
+          "suppression",
+          "gestion",
+          "impôts"
+        ]
+      },
+      {
+        "nom": "Contestation de la légitimité des bénéficiaires",
         "poids": "secondaire",
         "mots_cles": [
-          "extrême gauche",
+          "influenceurs",
+          "streameurs",
+          "Ultia",
           "Blast",
-          "StreetPress",
-          "Jean Massiet",
-          "propagande de gauche",
-          "financement public",
-          "médias orientés",
-          "exclusion de la droite"
+          "Backseat",
+          "compétence",
+          "échec commercial"
+        ]
+      },
+      {
+        "nom": "Défense contre les accusations de partialité",
+        "poids": "marginal",
+        "mots_cles": [
+          "manipulation",
+          "extrême droite",
+          "faits",
+          "fausse information",
+          "harcèlement"
         ]
       }
     ]
   },
   "brief": {
     "repondre": "oui",
-    "timing": "Dans les prochaines heures pour éviter que le récit ne s'ancre",
-    "cible_narrative": "Favoritisme politique et copinage au CNC",
+    "timing": "Dans les prochaines 48 heures, avant que les narratifs ne se consolident davantage.",
+    "cible_narrative": "Dénonciation d'un système de favoritisme idéologique",
     "posture": "factuel",
-    "justification": "La propagation en 'traine' permet une réponse posée sans alimenter une escalade ; le narratif dominant est adressable par des faits sur les critères de sélection et la composition des commissions ; une mise au point factuelle peut dissiper les soupçons de partialité.",
+    "justification": "La crise est en phase de latence avec une agressivité modérée, ce qui permet une réponse posée. Le narratif dominant accuse le CNC de partialité idéologique ; une réponse factuelle rappelant les critères objectifs de financement peut couper court aux spéculations et rétablir la confiance.",
     "confiance": "haute",
     "escalade_humaine": false
   },
   "riposte": {
     "messages": [
-      "Le CNC rappelle que ses aides sont attribuées par des commissions indépendantes selon des critères artistiques et techniques objectifs. Aucune décision individuelle ne repose sur des considérations politiques. La composition des commissions est publique et diversifiée.",
-      "Les procédures de sélection du CNC sont encadrées par des règles strictes garantissant l'équité et la transparence. Les soupçons de favoritisme ne sont pas fondés. Nous invitons à consulter les modalités d'attribution disponibles sur notre site officiel."
+      "Le CNC applique des critères de sélection transparents et objectifs, définis par la réglementation en vigueur. Les décisions de financement sont fondées sur la qualité artistique, la faisabilité et l’intérêt culturel, sans considération idéologique.",
+      "Ces critères sont publics et accessibles à tous. Le CNC réaffirme son engagement en faveur de l’égalité de traitement et de la diversité des projets soutenus. Toute accusation de favoritisme est infondée."
     ],
-    "canal": "tweet",
+    "canal": "fil",
     "a_valider_humainement": true
   },
   "metriques": {
     "analyste": {
-      "appels": 1,
-      "input_tokens": 3502,
-      "output_tokens": 658,
-      "total_tokens": 4160,
-      "duree_s": 9.78
+      "appels": 0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "total_tokens": 0,
+      "duree_s": 0.92
     },
     "stratege": {
       "appels": 1,
-      "input_tokens": 937,
-      "output_tokens": 706,
-      "total_tokens": 1643,
-      "duree_s": 8.29
+      "input_tokens": 971,
+      "output_tokens": 735,
+      "total_tokens": 1706,
+      "duree_s": 10.21
     },
     "redacteur": {
       "appels": 1,
-      "input_tokens": 501,
-      "output_tokens": 1294,
-      "total_tokens": 1795,
-      "duree_s": 13.71
+      "input_tokens": 516,
+      "output_tokens": 947,
+      "total_tokens": 1463,
+      "duree_s": 10.14
     }
   },
   "erreur": null
