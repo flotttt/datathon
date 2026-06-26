@@ -1,4 +1,12 @@
-import { Activity, MessageSquare, ShieldAlert, TrendingUp } from "lucide-react"
+import {
+  Activity,
+  BarChart3,
+  Loader2,
+  MessageSquare,
+  Play,
+  ShieldAlert,
+  TrendingUp,
+} from "lucide-react"
 import type { CrisisData } from "@/lib/crisis-data"
 
 function Metric({
@@ -33,7 +41,19 @@ function Metric({
   )
 }
 
-export function ContextBanner({ context }: { context: CrisisData["context"] }) {
+export function ContextBanner({
+  context,
+  onRun,
+  running = false,
+  onMarimo,
+  marimoLoading = false,
+}: {
+  context: CrisisData["context"]
+  onRun?: () => void
+  running?: boolean
+  onMarimo?: () => void
+  marimoLoading?: boolean
+}) {
   return (
     <header className="animate-rise rounded-2xl border border-border bg-card/60 p-5 backdrop-blur-sm">
       <div className="flex flex-wrap items-center justify-between gap-4">
@@ -43,17 +63,49 @@ export function ContextBanner({ context }: { context: CrisisData["context"] }) {
             <span className="relative inline-flex size-2.5 rounded-full bg-primary" />
           </span>
           <div>
-            <p className="text-[0.7rem] uppercase tracking-widest text-muted-foreground">
-              Salle de crise
+            <p className="font-mono text-[0.7rem] uppercase tracking-[0.2em] text-primary">
+              ● Salle de crise
             </p>
             <h1 className="text-lg font-semibold leading-tight text-foreground text-balance">
               {context.cellLabel}
             </h1>
           </div>
         </div>
-        <span className="rounded-full border border-border bg-secondary px-3 py-1 font-mono text-xs text-muted-foreground">
-          entité · {context.entity}
-        </span>
+        <div className="flex items-center gap-2.5">
+          <span className="rounded-full border border-border bg-secondary px-3 py-1 font-mono text-xs text-muted-foreground">
+            entité · {context.entity}
+          </span>
+          {onMarimo ? (
+            <button
+              type="button"
+              onClick={onMarimo}
+              disabled={marimoLoading}
+              className="inline-flex items-center gap-2 rounded-md border border-border bg-secondary px-3.5 py-2 font-mono text-xs font-medium uppercase tracking-wide text-muted-foreground transition-colors hover:border-primary/40 hover:text-foreground disabled:cursor-not-allowed disabled:opacity-60"
+            >
+              {marimoLoading ? (
+                <Loader2 className="size-3.5 animate-spin" />
+              ) : (
+                <BarChart3 className="size-3.5" />
+              )}
+              Dashboard viz
+            </button>
+          ) : null}
+          {onRun ? (
+            <button
+              type="button"
+              onClick={onRun}
+              disabled={running}
+              className="inline-flex items-center gap-2 rounded-md border border-primary/40 bg-primary/10 px-3.5 py-2 font-mono text-xs font-medium uppercase tracking-wide text-primary transition-colors hover:bg-primary/15 disabled:cursor-not-allowed disabled:opacity-60"
+            >
+              {running ? (
+                <Loader2 className="size-3.5 animate-spin" />
+              ) : (
+                <Play className="size-3.5" />
+              )}
+              {running ? "Analyse en cours…" : "Relancer"}
+            </button>
+          ) : null}
+        </div>
       </div>
 
       <div className="mt-5 grid grid-cols-2 gap-4 border-t border-border pt-5 sm:grid-cols-4">

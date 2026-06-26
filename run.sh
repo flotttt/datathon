@@ -56,12 +56,23 @@ fi
 # --- 3bis) Installer les dependances si besoin ---------------------
 # On teste un import cle ; s'il manque, on installe requirements.txt.
 # Evite de relancer pip a chaque fois (rapide quand tout est deja la).
-if ! $PY -c "import langgraph, langchain_openai, pandas, openpyxl" 2>/dev/null; then
+if ! $PY -c "import langgraph, langchain_openai, pandas, openpyxl, fastapi, uvicorn" 2>/dev/null; then
   echo "[SETUP] Dependances manquantes -> installation (requirements.txt)..."
   $PIP install -q -r requirements.txt
   echo "[OK] Dependances installees."
 else
   echo "[OK] Dependances deja presentes."
+fi
+
+# --- Mode --api : micro-service HTTP pour le dashboard React --------
+if [ "${1:-}" = "--api" ]; then
+  PORT="${PORT:-8077}"
+  echo "----------------------------------------------"
+  echo "[API] Orchestrateur expose sur http://localhost:$PORT"
+  echo "      Endpoint : POST /run   (Ctrl+C pour quitter)"
+  echo "----------------------------------------------"
+  PORT="$PORT" $PY -m uvicorn api_service:app --host 0.0.0.0 --port "$PORT"
+  exit 0
 fi
 
 # --- Mode --check : on s'arrete avant l'appel LLM ------------------

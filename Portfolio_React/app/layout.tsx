@@ -1,11 +1,14 @@
 import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
-import { Geist, Geist_Mono } from 'next/font/google'
+import { Inter, JetBrains_Mono } from 'next/font/google'
 import './globals.css'
 
-const geistSans = Geist({ variable: '--font-geist-sans', subsets: ['latin'] })
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
+const sans = Inter({
+  variable: '--font-sans',
+  subsets: ['latin'],
+})
+const mono = JetBrains_Mono({
+  variable: '--font-mono',
   subsets: ['latin'],
 })
 
@@ -35,7 +38,7 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   colorScheme: 'dark',
-  themeColor: '#1a132a',
+  themeColor: '#15130f',
 }
 
 export default function RootLayout({
@@ -46,7 +49,7 @@ export default function RootLayout({
   return (
     <html
       lang="fr"
-      className={`dark ${geistSans.variable} ${geistMono.variable}`}
+      className={`dark ${sans.variable} ${mono.variable}`}
     >
       <body className="bg-background font-sans antialiased">
         {children}
