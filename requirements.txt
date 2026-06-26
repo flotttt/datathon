@@ -6,3 +6,5 @@ langchain
 langchain[anthropic]
 langgraph
 python-dotenv
+fastapi
+uvicorn[standard]

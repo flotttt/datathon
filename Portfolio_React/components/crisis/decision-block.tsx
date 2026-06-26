@@ -10,25 +10,25 @@ import type { CrisisData, Verdict } from "@/lib/crisis-data"
 
 const verdictConfig: Record<
   Verdict,
-  { label: string; tone: string; ring: string; glow: string }
+  { label: string; tone: string; ring: string; edge: string }
 > = {
   repondre: {
     label: "Répondre",
     tone: "text-success",
-    ring: "border-success/40 bg-success/10",
-    glow: "shadow-[0_0_60px_-15px_var(--color-success)]",
+    ring: "border-success/40 bg-success/[0.06]",
+    edge: "border-l-success",
   },
   temporiser: {
     label: "Temporiser",
     tone: "text-warning",
-    ring: "border-warning/40 bg-warning/10",
-    glow: "shadow-[0_0_60px_-15px_var(--color-warning)]",
+    ring: "border-warning/40 bg-warning/[0.06]",
+    edge: "border-l-warning",
   },
   "ne-pas-repondre": {
     label: "Ne pas répondre",
     tone: "text-danger",
-    ring: "border-danger/40 bg-danger/10",
-    glow: "shadow-[0_0_60px_-15px_var(--color-danger)]",
+    ring: "border-danger/40 bg-danger/[0.06]",
+    edge: "border-l-danger",
   },
 }
 
@@ -64,22 +64,22 @@ export function DecisionBlock({
   return (
     <section
       aria-label="Décision recommandée"
-      className={`animate-rise rounded-3xl border ${cfg.ring} ${cfg.glow} p-6 sm:p-8`}
+      className={`animate-rise rounded-lg border border-l-2 ${cfg.ring} ${cfg.edge} p-6 sm:p-8`}
       style={{ animationDelay: "80ms" }}
     >
       <div className="flex flex-wrap items-start justify-between gap-4">
         <div className="flex items-center gap-4">
           <div
-            className={`flex size-14 items-center justify-center rounded-2xl border ${cfg.ring} ${cfg.tone}`}
+            className={`flex size-14 items-center justify-center rounded-md border ${cfg.ring} ${cfg.tone}`}
           >
             <CheckCircle2 className="size-7" />
           </div>
           <div>
-            <p className="text-xs uppercase tracking-widest text-muted-foreground">
+            <p className="font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground">
               Décision recommandée
             </p>
             <h2
-              className={`text-4xl font-bold leading-none tracking-tight sm:text-5xl ${cfg.tone}`}
+              className={`font-mono text-3xl font-bold uppercase leading-none tracking-tight sm:text-4xl ${cfg.tone}`}
             >
               {cfg.label}
             </h2>
