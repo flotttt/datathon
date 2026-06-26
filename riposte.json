@@ -34,74 +34,68 @@
     ],
     "narratifs": [
       {
-        "nom": "Copinage et partialité politique du CNC",
+        "nom": "Copinage et favoritisme politique à gauche",
         "poids": "dominant",
         "mots_cles": [
           "copinage",
-          "gauchisme",
+          "gauche",
           "extrême gauche",
-          "partialité",
-          "Ultia",
-          "conflit d'intérêts",
           "potes",
-          "argent public",
+          "subventions",
+          "CNC Talent",
+          "Ultia",
+          "Blast",
+          "StreetPress",
+          "Jean Massiet",
+          "partialité",
           "favoritisme"
         ]
       },
       {
-        "nom": "Détournement et gaspillage de l'argent public",
-        "poids": "dominant",
-        "mots_cles": [
-          "détournement",
-          "gaspillage",
-          "argent des Français",
-          "subventions",
-          "scandale",
-          "inutile",
-          "échec commercial",
-          "taxes"
-        ]
-      },
-      {
-        "nom": "Appels à la réforme ou à la suppression du CNC Talent",
+        "nom": "Détournement et gaspillage d'argent public",
         "poids": "secondaire",
         "mots_cles": [
-          "supprimer",
-          "rendre l'argent",
-          "justice",
-          "enquête",
-          "sanction",
-          "couper",
-          "réforme"
+          "argent public",
+          "taxes",
+          "gaspillage",
+          "30 000 euros",
+          "144 000 euros",
+          "800 millions",
+          "contribuable",
+          "scandale",
+          "détournement",
+          "financé"
         ]
       },
       {
-        "nom": "Défense ou relativisation des critiques",
+        "nom": "Appels à la réforme et à la justice",
         "poids": "marginal",
         "mots_cles": [
-          "manipulation",
-          "damage control",
-          "système",
-          "extrême droite",
-          "aides à la presse",
-          "Le Figaro"
+          "justice",
+          "sanction",
+          "virer",
+          "enquête",
+          "supprimer",
+          "réforme",
+          "Charles Alloncle",
+          "rendre l'argent"
         ]
       }
     ]
   },
   "brief": {
     "repondre": "oui",
-    "timing": "Dans les 48 heures, avant que la rumeur ne s'installe durablement",
-    "cible_narrative": "Copinage et partialité politique du CNC",
+    "timing": "Immédiatement, avant que le narratif dominant ne s’ancre davantage dans l’opinion.",
+    "cible_narrative": "Copinage et favoritisme politique à gauche",
     "posture": "factuel",
-    "justification": "La propagation en phase de traîne permet une réponse mesurée. Produire des preuves tangibles du processus objectif d'attribution des aides peut neutraliser l'accusation de copinage, qui est le narratif dominant. Une posture factuelle évite d'alimenter la polémique tout en rétablissant les faits.",
+    "justification": "La propagation en phase de traîne permet une réponse posée sans risque d’embrasement. Le narratif dominant repose sur des accusations de favoritisme que le CNC peut contrer avec des faits vérifiables (critères objectifs d’attribution des subventions). Une mise au point factuelle coupera court à la polémique.",
     "confiance": "haute",
     "escalade_humaine": false
   },
   "riposte": {
     "messages": [
-      "1/3 Le CNC attribue ses aides selon des critères objectifs et transparents, examinés par des commissions indépendantes composées de professionnels du secteur. \n\n2/3 Chaque dossier est évalué sur la base de la qualité artistique, de la diversité des projets et de leur impact culturel, sans intervention politique. \n\n3/3 Les procédures sont publiques et consultables. Toute accusation de partialité ou de copinage est infondée et ne repose sur aucun élément vérifié.",
-      "1/3 Face aux allégations de favoritisme, le CNC rappelle que ses décisions sont fondées sur des règles écrites et des grilles d’évaluation publiées. \n\n2/3 Les membres des commissions sont soumis à des règles de déontologie strictes, et tout conflit d’intérêt est exclu. \n\n3/3 Nous invitons à consulter les rapports d’activité et les délibérations accessibles sur notre site pour constater la rigueur de nos processus."
+      "1/2 Le CNC attribue ses aides selon des critères objectifs et transparents, examinés par des commissions indépendantes. Toute allégation de favoritisme est contraire aux faits.",
+      "2/2 Les décisions sont motivées et publiées. Le CNC agit en toute impartialité pour soutenir le cinéma. Nous invitons à consulter les informations disponibles sur notre site."
     ],
     "canal": "fil",
     "a_valider_humainement": true
@@ -110,23 +104,23 @@
     "analyste": {
       "appels": 1,
       "input_tokens": 3502,
-      "output_tokens": 758,
-      "total_tokens": 4260,
-      "duree_s": 11.54
+      "output_tokens": 1074,
+      "total_tokens": 4576,
+      "duree_s": 12.96
     },
     "stratege": {
       "appels": 1,
-      "input_tokens": 997,
-      "output_tokens": 949,
-      "total_tokens": 1946,
-      "duree_s": 12.67
+      "input_tokens": 947,
+      "output_tokens": 641,
+      "total_tokens": 1588,
+      "duree_s": 6.86
     },
     "redacteur": {
       "appels": 1,
-      "input_tokens": 515,
-      "output_tokens": 999,
-      "total_tokens": 1514,
-      "duree_s": 13.01
+      "input_tokens": 521,
+      "output_tokens": 1505,
+      "total_tokens": 2026,
+      "duree_s": 12.6
     }
   },
   "erreur": null,

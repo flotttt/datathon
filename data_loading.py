@@ -4,7 +4,7 @@ import os
 
 import pandas as pd
 
-DEFAULT_PATH = os.environ.get("DATATHON_DATA", "data.xlsx")
+DEFAULT_PATH = os.environ.get("DATATHON_DATA", "Dataset/data.xlsx")
 
 ORIGINAL_LABEL = "ORIGINAL"
 

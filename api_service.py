@@ -16,6 +16,7 @@ import socket
 import subprocess
 import time
 from pathlib import Path
+import sys
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
@@ -61,10 +62,12 @@ def health() -> dict:
 _marimo_proc = None
 
 
-def _marimo_exe() -> str:
-    """Prefere le marimo du venv de datathon-viz, sinon celui du PATH."""
+def _marimo_exe() -> list[str]:
+    """Prefere le marimo du venv de datathon-viz, sinon `python -m marimo`."""
     cand = MARIMO_DIR / ".venv" / "bin" / "marimo"
-    return str(cand) if cand.exists() else "marimo"
+    if cand.exists():
+        return [str(cand)]
+    return [sys.executable, "-m", "marimo"]
 
 
 def _port_ouvert(port: int) -> bool:
@@ -87,7 +90,7 @@ def marimo() -> JSONResponse:
         env["DATATHON_DATA"] = str(RACINE / "Dataset" / "data.xlsx")
         _marimo_proc = subprocess.Popen(
             [
-                _marimo_exe(), "run", "app.py",
+                *_marimo_exe(), "run", "app.py",
                 "--headless", "--host", "127.0.0.1",
                 "--port", str(MARIMO_PORT), "--no-token",
             ],
